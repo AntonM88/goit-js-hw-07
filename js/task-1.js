@@ -1,43 +1,22 @@
-// ======================================================================
+// З використанням властивостей і методів DOM-елементів, напиши скрипт, який:
+// Порахує й виведе в консоль кількість категорій в ul#categories, тобто елементів li.item.
+// Для кожного елемента li.item у списку ul#categories знайде й виведе в консоль текст заголовка елемента (тегу <h2>) і кількість елементів у категорії (усіх <li>, вкладених у нього).
+// ====================================================================
 
-//* Задача 1. Акаунт користувача
+// const categoriesList = document.getElementById('categories');
+// const categoriesList = document.querySelector('ul');
+// const categoryItems = categoriesList.querySelectorAll('.item');
 
-// ======================================================================
-// Перед звільненням розробник зламав вихідний код управління акаунтами користувачів нашого сервісу доставки їжі. Виконай рефакторинг методів об'єкта customer, розставивши відсутні this під час звернення до властивостей об'єкта.
-// Використай цей стартовий код і виконай рефакторинг. Після оголошення об'єкта ми додали виклики методів. У консоль будуть виведені результати їх роботи. Будь ласка, нічого там не змінюй.
-// ======================================================================
+const categoryItems = document.querySelectorAll('.item');
 
-const customer = {
-  username: 'Mango',
-  balance: 24000,
-  discount: 0.1,
-  orders: ['Burger', 'Pizza', 'Salad'],
+console.log('Number of categories:', categoryItems.length);
 
-  getBalance() {
-    return this.balance;
-  },
+categoryItems.forEach(item => {
+  const categoryTitle = item.querySelector('h2').textContent;
 
-  getDiscount() {
-    return this.discount;
-  },
+  const categoryItems = item.querySelectorAll('li');
 
-  setDiscount(value) {
-    this.discount = value;
-  },
+  console.log(`Category: ${categoryTitle}`);
 
-  getOrders() {
-    return this.orders;
-  },
-
-  addOrder(cost, order) {
-    this.balance -= cost - cost * this.discount;
-    this.orders.push(order);
-  },
-};
-
-customer.setDiscount(0.15);
-console.log(customer.getDiscount()); // 0.15
-customer.addOrder(5000, 'Steak');
-console.log(customer.getBalance()); // 19750
-console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
-// ======================================================================
+  console.log(`Elements: ${categoryItems.length}`);
+});
